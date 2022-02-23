@@ -29,6 +29,5 @@ test('recipe name from state appears in an unordered list', async () => {
   await userEvent.type(nameInput, recipeName)
   userEvent.click(submitButton);
 
-  expect(screen.getByRole('listitem')).toBeInTheDocument();
   expect(screen.getByText(recipeName)).toBeInTheDocument();
 })

@@ -26,17 +26,17 @@ describe("Home page", () => {
       expect(cy.findByRole('listitem', /tofu scramble tacos/i)).toExist();
       })
   })
-  it("adds multiple recipes", () => {
-    const recipeName = 'Cereal';
-    cy.findByRole('button').click()
-    cy.findByRole('textbox', {name: /Recipe name/i}).type(recipeName)
-    cy.findByRole('textbox', {name: /instructions/i}).type("1. Add cereal 2. Add Milk")
+  // it("adds multiple recipes", () => {
+  //   const recipeName = 'Cereal';
+  //   cy.findByRole('button').click()
+  //   cy.findByRole('textbox', {name: /Recipe name/i}).type(recipeName)
+  //   cy.findByRole('textbox', {name: /instructions/i}).type("1. Add cereal 2. Add Milk")
 
-    return cy.findByRole('button').click()
-      .then(() => {
-      expect(cy.findByRole('listitem', /tofu scramble tacos/i)).toExist()
-      expect(cy.findByRole('listitem', /cereal/i)).toExist();
-      })
-  })
+  //   return cy.findByRole('button').click()
+  //     .then(() => {
+  //     expect(cy.findByRole('newRecipeName', /tofu scramble tacos/i)).toExist()
+  //     expect(cy.findByRole('n', /cereal/i)).toExist();
+  //     })
+  // })
 })
 

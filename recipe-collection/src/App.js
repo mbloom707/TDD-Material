@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 
 import React from 'react';
 
@@ -7,22 +7,47 @@ class App extends React.Component {
     isAddRecipeFormDisplayed: false,
     recipes: [],
     newRecipeName: "",
-    newRecipeInstructions: "",
-    listItem: ""
+    newRecipeInstructions: ""
   }
 
+  // addRecipe = (e) => {
+  //   e.preventDefault()
+  //   this.setState({listItem: [
+  //       {
+  //         name: [...this.state.newRecipeName],
+  //       }
+  //     ]
+  //   })
+  // }
+
+
   submitRecipe = (event) => {
-    event.preventDefault()
-    this.setState({recipes: [
-        {
-          name: this.state.newRecipeName,
-          instructions :this.state.newRecipeInstructions
-        }
-      ]
+  //   event.preventDefault()
+  //   this.setState({recipes: [
+  //       {
+  //         name: this.state.newRecipeName,
+  //         instructions :this.state.newRecipeInstructions
+  //       }
+  //     ]
+  //   })
+  // }
+  let newRecipe=
+    {
+      name: this.state.newRecipeName,
+      instructions :this.state.newRecipeInstructions
+    };
+
+    this.setState({recipes: [newRecipe, ...this.state.recipes]})
+
+    this.setState({
+      newRecipeName:'',
+      newRecipeInstructions: "",
     })
+
   }
 
   handleChange = (event) => {
+    event.preventDefault()
     const target = event.target;
     const name = target.name;
 
@@ -33,13 +58,9 @@ class App extends React.Component {
     this.setState({isAddRecipeFormDisplayed: !this.state.isAddRecipeFormDisplayed})
   }
 
-  listItems = (name) => {
-    const itemList = itemList + " " + name;
-  }
-
   render(){
     const addNewRecipeForm = (
-      <form id="recipe-form" onSubmit={this.submitRecipe} >
+      <form id="recipe-form" onSubmit={this.submitRecipe}>
         <label htmlFor="newRecipeName">Recipe name: </label>
         <input type="text"
           id="newRecipeName"
@@ -52,14 +73,16 @@ class App extends React.Component {
           placeholder="write recipe instructions here..."
           onChange={this.handleChange}
           value={this.state.newRecipeInstructions} />
-        <input type="submit" />
+        <input type="submit"/>
       </form>
     )
 
     return (
       <div className="App">
         <h1 className="App-header">My Recipes</h1>
-        <>{ this.state.recipes.name }</>
+        <ul>
+        {this.state.recipes.map(recipe => <li key={recipe.name}> { recipe.name } </li>)}
+        </ul>
         {
           this.state.isAddRecipeFormDisplayed
           ? addNewRecipeForm
@@ -69,7 +92,7 @@ class App extends React.Component {
         {
           this.state.recipes.length > 0 ?
           <ul>
-            <li>{ this.state.recipes[0].name }</li>
+            {/* <li>{ this.state.recipes[0].name }</li> */}
           </ul> :
           <p>There are no recipes to list.</p>
         }
